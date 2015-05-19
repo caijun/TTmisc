@@ -1,0 +1,10 @@
+Package: TTmisc
+Type: Package
+Title: TTmisc: Tony Tsai Miscellaneous R functions
+Version: 0.1
+Date: 2015-05-18
+Author: Jun Cai <cai-j12@mails.tsinghua.edu.cn>
+Maintainer: Jun Cai <cai-j12@mails.tsinghua.edu.cn>
+Description: TTmisc contains miscellaneous R functions that Tony Tsai creates or modifies for his routine data analysis and statistical modeling.
+License: GPL-3
+LazyData: TRUE
