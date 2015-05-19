@@ -28,6 +28,7 @@ list <- structure(NA, class = "result")
 #'
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), Ph.D. student from
 #' Center for Earth System Science, Tsinghua University
+#' @references \url{http://stackoverflow.com/questions/1826519/function-returning-more-than-one-value}
 #' @export
 #' @examples
 #' # unpack results from function returning multiple values

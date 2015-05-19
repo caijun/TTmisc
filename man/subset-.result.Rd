@@ -67,4 +67,7 @@ list[x, y, all = TRUE] <- fun()  # return x = 1, y = 2
 Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), Ph.D. student from
 Center for Earth System Science, Tsinghua University
 }
+\references{
+\url{http://stackoverflow.com/questions/1826519/function-returning-more-than-one-value}
+}
 
