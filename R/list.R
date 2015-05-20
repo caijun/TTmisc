@@ -14,15 +14,18 @@ list <- structure(NA, class = "result")
 #' list[x, ] <- value
 #' list[, y] <- value
 #' list[x, y, ..., all = FALSE] <- value
+#' list[x, y, ..., drop = TRUE] <- value
 #' @param list an exported structure variable with class attribute of \code{result}.
 #' @param x,y variable names. List elements at corresponding index are extracted and then
 #' assigned to those variables.
-#' @param ... empty strings for positions of list elements without interest. By default
+#' @param ... spaces for positions of list elements without interest. By default
 #' these elements are not extracted to corresponding variables with same names.
 #' Setting \code{all} to TRUE can also extract those elements without interest.
 #' @param all whether extract all named elements to variables. The default is FALSE
-#' # except for the case without specifying any arguments, in which all elements
+#' except for two cases:  \emph{no} or \emph{all} variables specified, in which all elements
 #' are extracted to corresponding variables.
+#' @param drop delete the dimensions of extracted variables which have only one level.
+#' The default is TRUE.
 #' @param value a list object with named elements.
 #' @return named variables such as \code{x}, \code{y} and variables with element names.
 #'
@@ -32,21 +35,23 @@ list <- structure(NA, class = "result")
 #' @export
 #' @examples
 #' # unpack results from function returning multiple values
-#' # define a function returning two values
-#' fun <- function() list(a = 1, b = 2)
+#' # define a function returning a matrix and a numeric, and the matrix can be
+#' # dropped into a numeric
+#' fun <- function() list(a = matrix(1, nr = 1, nc = 1), b = 2)
 #'
-#' # implicitly extract all variabes without renaming
+#' # implicitly extract all variabes without renaming. note that by default
+#' # dimensions are dropped.
 #' list[] <- fun()  # return a = 1, b = 2
 #'
-#' # explicitly extract all variables without renaming
-#' list[, , all = TRUE] <- fun()  # return a = 1, b = 2
-#'
-#' # no variables extracted
-#' list[, , all = FALSE] <- fun()
+#' # explicitly extract all variables without renaming and dimension dropping
+#' list[, , all = TRUE, drop = FALSE] <- fun()  # return matrix a, b = 2
 #'
 #' # only extract the first variable and assign it to x. note that by default only
 #' # element of interest is extracted and renamed.
 #' list[x, ] <- fun()  # return x = 1
+#'
+#' # set drop to FALSE without dimension dropping
+#' list[x, , drop = FALSE] <- fun()  # return matrix x
 #'
 #' # set all to TRUE to extract all elements.
 #' list[x, , all = TRUE] <- fun()  # return x = 1, b = 2
@@ -58,17 +63,23 @@ list <- structure(NA, class = "result")
 #' list[x, y] <- fun()  # return x = 1, y = 2
 #'
 #' # parameter all ignored
-#' list[x, y, all = TRUE] <- fun()  # return x = 1, y = 2
+#' list[, all = FALSE] <- fun()  # return a = 1, b = 2
+#' list[x, y, all = FALSE] <- fun()  # return x = 1, y = 2
 "[<-.result" <- function(x, ..., value) {
   nv <- names(value)
   args <- as.list(match.call())
   args <- args[-c(1:2, length(args))]
-  if (!"all" %in% names(args)) {
-    all <- FALSE
-  } else {
+  all <- FALSE
+  if ("all" %in% names(args)) {
     all <- args[["all"]]
     stopifnot(is.logical(all))
     args["all"] <- NULL
+  }
+  drop = TRUE
+  if ("drop" %in% names(args)) {
+    drop <- args[["drop"]]
+    stopifnot(is.logical(drop))
+    args["drop"] <- NULL
   }
 
   if (length(args) == 1) args <- sapply(nv, as.name)
@@ -77,7 +88,8 @@ list <- structure(NA, class = "result")
     if (missing(a)) {
       if (all) a <- as.name(nv[i]) else next
     }
-    eval.parent(substitute(a <- v, list(a = a, v = value[[i]])))
+    if (drop) v <- drop(value[[i]]) else v <- value[[i]]
+    eval.parent(substitute(a <- v, list(a = a, v = v)))
   }
   x
 }
