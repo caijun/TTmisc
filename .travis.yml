@@ -4,5 +4,8 @@ language: r
 
 # sudo: required # for new repository
 
+install:
+  - ./travis-tool.sh github_package jimhester /covr
+
 after_success:
   - Rscript -e 'library(covr);coveralls()'
