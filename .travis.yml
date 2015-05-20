@@ -2,4 +2,7 @@
 
 language: r
 
-sudo: required
+# sudo: required # for new repository
+
+after_success:
+  - Rscript -e 'library(covr);coveralls()'
