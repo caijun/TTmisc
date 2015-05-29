@@ -4,7 +4,7 @@ language: r
 
 sudo: required
 
-r_packages:
+r_binary_packages:
   - testthat
 
 r_github_packages:
