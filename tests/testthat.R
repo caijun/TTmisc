@@ -1,4 +1,4 @@
 library(testthat)
-library(covr)
+library(TTmisc)
 
-test_check(package = "TTmisc")
+test_check("TTmisc")
