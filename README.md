@@ -3,7 +3,7 @@
 
 # TTmisc
 
-[![Build Status](https://travis-ci.org/caijun/TTmisc.png?branch=master)](https://travis-ci.org/caijun/TTmisc) [![Coverage Status](https://coveralls.io/repos/caijun/TTmisc/badge.svg)](https://coveralls.io/r/caijun/TTmisc)
+[![Build Status](https://travis-ci.org/caijun/TTmisc.svg?branch=master)](https://travis-ci.org/caijun/TTmisc) [![codecov.io](http://codecov.io/github/caijun/TTmisc/coverage.svg?branch=master)](http://codecov.io/github/caijun/TTmisc?branch=master)
 
 TTmisc: Tony Tsai Miscellaneous R functions
 
