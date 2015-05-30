@@ -14,7 +14,7 @@ library(TTmisc)
 
 # TTmisc
 
-[![Build Status](https://travis-ci.org/caijun/TTmisc.svg?branch=master)](https://travis-ci.org/caijun/TTmisc) [![Coverage Status](https://img.shields.io/coveralls/caijun/TTmisc.svg)](https://coveralls.io/r/caijun/TTmisc?branch=master)
+[![Build Status](https://travis-ci.org/caijun/TTmisc.svg?branch=master)](https://travis-ci.org/caijun/TTmisc) [![Coverage Status](https://coveralls.io/repos/caijun/TTmisc/badge.svg?branch=master)](https://coveralls.io/r/caijun/TTmisc?branch=master)
 
 TTmisc: Tony Tsai Miscellaneous R functions
 
