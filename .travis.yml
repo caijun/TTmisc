@@ -2,8 +2,6 @@
 
 #language: r
 #
-#sudo: required
-#
 #r_packages:
 #  - testthat
 #
@@ -14,6 +12,8 @@
 #  - Rscript -e 'library(covr);codecov()'
 
 language: c
+
+sudo: required
 
 env:
   - global:
